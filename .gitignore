@@ -6,6 +6,9 @@ node_modules/
 !.config/xfce4/xfconf/*
 !.config/xfce4/panel/*
 .config/nvim/lazy-lock.json
+local.shada
+Session.vim
+
 # Nvim Config
 # !.config/nvim/*
 # !.config/nvim/colors/*
