@@ -279,3 +279,6 @@ bindkey '^R' fzf-history-widget
 # ----------
 # ---- EOF ----
 # ----------
+
+# Added by Antigravity
+export PATH="/Users/bowmanpete/.antigravity/antigravity/bin:$PATH"

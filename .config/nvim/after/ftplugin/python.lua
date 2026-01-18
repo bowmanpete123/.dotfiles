@@ -165,4 +165,4 @@ local constant_query = [[
 
 local full_query =
   require("config.utils").create_treesitter_injection_query(constant_query, dynamic_query, injection_languages)
-vim.treesitter.query.set("markdown", "injections", full_query)
+vim.treesitter.query.set("python", "injections", full_query)
