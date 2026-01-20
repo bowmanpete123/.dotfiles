@@ -1,11 +1,11 @@
-# Workflow: Create Functional or Class
+# Workflow: Create Business Logic 
 
 **Goal**: Implement a new coding structure (Function or Class) with TDD and high quality.
 
 ---
 
-## Step 1: Scenario  
-**Role**: [Business Analyst](../roles/business_analyst.md)
+## Step 1: Scenario Analysis/Process Analysis
+**Role**: [Technical Lead](../roles/technical_lead.md)
 **Input**: `task.md` + Architect Spec.
 **Action**:
 1.  **Analyze & Inquire (CRITICAL)**: Review the technical spec and ask the user as many clarifying questions as necessary to tease out every possible edge case, error state, and nuance. Be as **informative** as possible.

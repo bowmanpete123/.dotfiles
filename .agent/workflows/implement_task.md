@@ -24,6 +24,7 @@
 **Role**: [Project Manager](../roles/project_manager.md)
 **Action**:
 1.  **Check Roadmap**: Ensure item matches an entry in `docs/roadmap/ROADMAP.md`.
+1.  **Take 3rd Level Task From Roadmap**: Ensure item matches an entry in `docs/roadmap/ROADMAP.md`.
 2.  **Fallback**: If truly ad-hoc, document requirements in `task.md`.
 
 ---
@@ -32,27 +33,28 @@
 **Role**: [Project Manager](../roles/project_manager.md)
 **Action**:
 1.  Checkout base: `git checkout main && git pull origin main`
+2.  Populate `task.md` with the new "feature name" `{task-id}-{short-description}` make sure this is reference able
 2.  Branch: `git checkout -b feature/{task-id}-{short-description}`
 
 ---
 
 ## Step 2: Decomposition
-**Role**: [Architect](../roles/architect.md)
-**Input**: Task requirements.
+**Role**: [Business Analyst](../roles/business_analyst.md)
+**Input**: Create Scenarios From Feature Requirement.
 **Action**:
-1.  Create a **Micro-Plan**: List of technical units to build.
-    - Unit 1: Class `X`
-    - Unit 2: Function `Y`
-2.  Populate `task.md` with items.
-3.  Get user approval on the plan.
+1.  Create a **Micro-Plan**: List of User Scenarios for the feature.
+3.  **Analyze & Inquire (CRITICAL)**: Review the technical spec and ask the user as many clarifying questions as necessary to tease out every possible edge case, error state, and nuance. Be as **informative** as possible.
+4.  **Define Scenarios**: Brainstorm exhaustive behavioral scenarios (Happy/Edge/Error).
+5.  **Break Down `task.md`**: As the primary owner of `task.md` for this workflow, break down the high-level unit task into granular, testable sub-items representing individual scenarios.
+5.  **Confirm**: Document detailed scenarios in the **Spec File** (naming convention: `docs/spec/{feature_name}_spec.md`) and **Get EXPRESS USER APPROVAL** before triggering the next role.
 
 ---
 
-## Step 3: Execution Loop (Repeat for Each Unit)
-**Input**: The specific unit from the Micro-Plan & Behavioral Scenarios.
+## Step 3: Execution Loop (Repeat for Each Behavioural Scenario)
+**Input**: The specific scenario from the Micro-Plan & Behavioural Scenarios.
 **Action**:
-1.  Trigger the **[Create Function or Class](./create_function_class.md)** workflow for each individual unit identified in the Micro-Plan.
-2.  Ensure each unit is fully reviewed and approved before proceeding to the next.
+1.  Trigger the **[Create Business Logic](./create_busines_logic.md)** workflow for each individual scenario identified in the Micro-Plan.
+2.  Ensure each scenario is fully reviewed and approved before proceeding to the next.
 
 ---
 
