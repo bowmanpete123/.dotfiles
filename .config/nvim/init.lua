@@ -185,6 +185,8 @@ end
 
 require("mini.starter").setup({
   items = {
+    { name = "New File", action = "new", section = "Quick Draw" },
+    { name = "Markdown File", action = "enew | set ft=markdown", section = "Quick Draw" },
     { name = "Restore Session ", action = "LoadProjectSession", section = "Workspace" },
     { name = "Folder ", action = "Oil", section = "Workspace" },
     {

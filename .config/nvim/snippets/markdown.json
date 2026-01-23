@@ -1,92 +1,137 @@
 {
-  "linksame": {
-    "prefix": "linksame",
-    "body": "[${1:name}][${1:name}Link]"
-  },
-  "linkdiff": {
-    "prefix": "linkdiff",
-    "body": "[${1:name}][${2:link}Link]"
-  },
-  "linkseemore": {
-    "prefix": "linkseemore",
-    "body": "[(further reading)][${1:name}Link]"
-  },
-  "internallink": {
-    "prefix": "internallink",
-    "body": "[${1:text}](#${2:heading})"
-  },
-  "anchorlink": {
-    "prefix": "anchorlink",
-    "body": "[${1:text}](#${2:heading})"
-  },
-  "reference": {
-    "prefix": "reference",
-    "body": "[${1:name}Link]: ${2:link}"
-  },
-  "comment": {
-    "prefix": "comment",
-    "body": "[//]: # (${1:Comment})"
-  },
-  "README_scaffold": {
-    "prefix": "README_scaffold",
-    "body": "---\nlast_edit: ${2:date}\nstatus: draft\n---\n\n# ${1:Title}\n\n## Purpose\n\n## Design\n\n### Components\n\n### Process\n\n## Setup\n\n## Known Issues\n\n[//]: # (References)\n"
-  },
-  "ROADMAP_scaffold": {
-    "prefix": "ROADMAP_scaffold",
-    "body": [
-      "#  RoadMap for ${1:Title}",
-      "## Requirements List",
-      "1. ${2:Req 1} (x)",
-      "2. ${3:Req 2} (x)",
-      "3. ${4:Req 3} (x)",
-      "### Work In Progress",
-      "1. ${2:Req 1} (x)",
-      "    1. ${5:Sub_req 1} (x)",
-      "        1. ${6:Task 1} (x)",
-      "### Future",
-      "2. ${3:Req 2} (x)",
-      "3. ${4:Req 3} (x)",
-      "### Scope Creep (x)",
-      ""
-    ],
-    "description": "Creates a new empty timesheet.md document"
-  },
-  "TIMESHEET_scaffold": {
-    "prefix": "TIMESHEET_scaffold",
-    "body": [
-      "# Timesheets",
-      "",
-      "",
-      "## Template",
-      "",
-      "| Date | Progress | Comments | Lessons | Design | Planned |",
-      "| --- | --- | --- | --- | --- | --- |",
-      "|     |     |     |     |Decisions|Progress|",
-      "|  format = |  Any            | in depth |  anything    | references  | Progress |",
-      "| HHMM:dd/mm/yyyy      | Roadmap.rst  |description of |I'll need  |to any ladrs|Planned|",
-      "| | changes      |roadmap changes|to research |that have   |for    |",
-      "|            | format #.#.# |               |            |been made   |session |",
-      "|            | (s->s)      |               |            |            |       |",
-      "",
-      "",
-      "## Timesheet Records",
-      "\n\n"
-    ],
-    "description": "Creates a new empty timesheet.md document"
-  },
-  "TIMESHEET_entry_start": {
-    "prefix": "TIMESHEET_entry_start",
-    "body": [
-      "| Date | Progress | Comments | Lessons | Design | Planned |",
-      "| --- | --- | --- | --- | --- | --- |",
-      "| S: ${1:HHMM}:${2:dd}/${3:mm}/${4:yyyy} |   |    |  |  | ${9:Planned}  |"
-    ],
-    "description": "Creates a new timesheet entry in the TIMESHEET.md"
-  },
+    "linksame": {
+        "prefix": "linksame",
+        "body": "[${1:name}][${1:name}Link]"
+    },
+    "linkdiff": {
+        "prefix": "linkdiff",
+        "body": "[${1:name}][${2:link}Link]"
+    },
+    "linkseemore": {
+        "prefix": "linkseemore",
+        "body": "[(further reading)][${1:name}Link]"
+    },
+    "internallink": {
+        "prefix": "internallink",
+        "body": "[${1:text}](#${2:heading})"
+    },
+    "anchorlink": {
+        "prefix": "anchorlink",
+        "body": "[${1:text}](#${2:heading})"
+    },
+    "reference": {
+        "prefix": "reference",
+        "body": "[${1:name}Link]: ${2:link}"
+    },
+    "comment": {
+        "prefix": "comment",
+        "body": "[//]: # (${1:Comment})"
+    },
+    "README_scaffold": {
+        "prefix": "README_scaffold",
+        "body": "---\nlast_edit: ${2:date}\nstatus: draft\n---\n\n# ${1:Title}\n\n## Purpose\n\n## Design\n\n### Components\n\n### Process\n\n## Setup\n\n## Known Issues\n\n[//]: # (References)\n"
+    },
+    "ROADMAP_scaffold": {
+        "prefix": "ROADMAP_scaffold",
+        "body": [
+            "#  RoadMap for ${1:Title}",
+            "## Requirements List",
+            "1. ${2:Req 1} (x)",
+            "2. ${3:Req 2} (x)",
+            "3. ${4:Req 3} (x)",
+            "### Work In Progress",
+            "1. ${2:Req 1} (x)",
+            "    1. ${5:Sub_req 1} (x)",
+            "        1. ${6:Task 1} (x)",
+            "### Future",
+            "2. ${3:Req 2} (x)",
+            "3. ${4:Req 3} (x)",
+            "### Scope Creep (x)",
+            ""
+        ],
+        "description": "Creates a new empty timesheet.md document"
+    },
+    "TIMESHEET_scaffold": {
+        "prefix": "TIMESHEET_scaffold",
+        "body": [
+            "# Timesheets",
+            "",
+            "",
+            "## Template",
+            "",
+            "| Date | Progress | Comments | Lessons | Design | Planned |",
+            "| --- | --- | --- | --- | --- | --- |",
+            "|     |     |     |     |Decisions|Progress|",
+            "|  format = |  Any            | in depth |  anything    | references  | Progress |",
+            "| HHMM:dd/mm/yyyy      | Roadmap.rst  |description of |I'll need  |to any ladrs|Planned|",
+            "| | changes      |roadmap changes|to research |that have   |for    |",
+            "|            | format #.#.# |               |            |been made   |session |",
+            "|            | (s->s)      |               |            |            |       |",
+            "",
+            "",
+            "## Timesheet Records",
+            "\n\n"
+        ],
+        "description": "Creates a new empty timesheet.md document"
+    },
+    "TIMESHEET_entry_start": {
+        "prefix": "TIMESHEET_entry_start",
+        "body": [
+            "| Date | Progress | Comments | Lessons | Design | Planned |",
+            "| --- | --- | --- | --- | --- | --- |",
+            "| S: ${1:HHMM}:${2:dd}/${3:mm}/${4:yyyy} |   |    |  |  | ${9:Planned}  |"
+        ],
+        "description": "Creates a new timesheet entry in the TIMESHEET.md"
+    },
     "TIMESHEET_entry_end": {
-      "prefix": "TIMESHEET_entry_end",
-      "body": ["| E: $L{1:HHMM}:${2:dd}/${3:mm}/${4:yyyy} | ${5:Progress}  | ${6:Comments}   | ${7:Lessons} | ${8:Design} |   |"],
-      "description": "Ends a timesheet entry in a TIMESHEET.md"
+        "prefix": "TIMESHEET_entry_end",
+        "body": [
+            "| E: $L{1:HHMM}:${2:dd}/${3:mm}/${4:yyyy} | ${5:Progress}  | ${6:Comments}   | ${7:Lessons} | ${8:Design} |   |"
+        ],
+        "description": "Ends a timesheet entry in a TIMESHEET.md"
+    },
+    "scaffold_Prompt": {
+        "prefix": "scaffold_Prompt",
+        "body": [
+            "# ROLE",
+            "You are a ${1:Role}.",
+            "Your expertise includes ${2:Skill 1} and ${3:Skill 2}.",
+            "---",
+            "# CONTEXT",
+            "I am working on ${4:Project Name/Goal}. ",
+            "The background is ${5:1-2 sentences explaining why you need this}.",
+            "The target audience is ${6:e.g., C-level executives / beginners / technical peers}.",
+            "---",
+            "# TASK",
+            "Please perform the following:",
+            "1. ${7:Primary Action, e.g., Analyze the attached code}",
+            "2. ${8:Secondary Action, e.g., Identify three performance bottlenecks}",
+            "3. ${9:Tertiary Action, e.g., Suggest refactored solutions}",
+            "---",
+            "# CONSTRAINTS & RULES",
+            "- **Length**: ${10:e.g., Keep it under 300 words}",
+            "- **Prohibited**: ${11:e.g., Do not use jargon / Avoid passive voice}",
+            "- **Requirements**: ${12:e.g., Include at least two real-world examples}",
+            "- **Language**: ${13:e.g., English (US)}",
+            "---",
+            "# EXAMPLES (Few-Shot)",
+            "> Input: ${14:Example Input}",
+            "> Output: ${15:Example of what a \"good\" response looks like}",
+            "---",
+            "# OUTPUT FORMAT",
+            "Please provide the response in **${16:Markdown / JSON / Table / Bullet Points}**.",
+            "Structure the response with the following headers:",
+            "## Summary",
+            "## Analysis",
+            "## Recommendation",
+            "---",
+            "# CLARIFICATION PROTOCOL",
+            "If any part of this task is ambiguous, or if you require specific data points to provide a high-quality response, **stop and ask me clarifying questions** before proceeding. ",
+            "Do not guess or assume missing context.",
+            "---",
+            "# FINAL INSTRUCTION",
+            "Before providing the final answer, **think step-by-step** to ensure all constraints are met."
+        ],
+        "description": "A simple way of making sure that I structure ad hoc prompts to an LLM"
     }
 }
-

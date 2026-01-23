@@ -139,6 +139,27 @@ M.setup = function()
     desc = "Loads Session.vim from the current directory",
   })
   ----------
+  -- Clear LSP Log if its too big
+  ----------
+  vim.api.nvim_create_autocmd("VimEnter", {
+    desc = "Clean large LSP logs on startup",
+    callback = function()
+      local lsp_log = vim.fn.stdpath("state") .. "/lsp.log"
+      local max_size = 10 * 1024 * 1024 -- 10MB
+
+      -- Use vim.uv (or vim.loop for older Nvim versions) to get file stats
+      local uv = vim.uv or vim.loop
+      local stat = uv.fs_stat(lsp_log)
+
+      if stat and stat.size > max_size then
+        local success = os.remove(lsp_log)
+        if success then
+          vim.notify("LSP log exceeded 10MB and was cleared.", vim.log.levels.INFO, { title = "System" })
+        end
+      end
+    end,
+  })
+  ----------
 end
 ----------
 
