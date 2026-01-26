@@ -36,8 +36,9 @@
             "force_wrap = false",
             "use_double_quotes = true",
             "",
-            "[tool.uv.build]",
-            "packages = [\"src\"]"
+            "[build-system]",
+            "requires = [\"setuptools>=42\", \"wheel\"]",
+            "build-backend = \"setuptools.build_meta\""
         ]
     },
     "scaffold_mise_py": {
