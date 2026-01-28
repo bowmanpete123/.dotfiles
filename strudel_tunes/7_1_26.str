@@ -1,0 +1,4 @@
+setcps(150/60/4)
+
+$drums: s("sbd!4").duck("2:3:4").duckattack("51").duckdepth("28")
+$bass: n("[[0 0 3 0][0 -2 5 0]]*2").scale("c2:minor").dist("1:.5").s("sawtooth").lpf(200).lpenv(slider(6.3,0,12))

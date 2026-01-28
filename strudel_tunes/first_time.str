@@ -1,0 +1,19 @@
+setcpm(124/4)
+// Start Here:
+// Ambient Noise
+$: sound("[0-10]/2").scale("e:major").sound("sawtooth").lpf(50)
+$: sound("[b-10]/2").scale("e:major").sound("sawtooth").lpf(100)
+$: n("[[0 -2 0 2][4 2 0 2][0 -2 0 2][4 2 4 2]]*1").scale("e:major").clip(6).s("gm_acoustic_bass").lpf(150)
+// Drums:
+$: sound("[- hh - hh]*2").bank("RolandTR808")
+$: sound("[bd - bd -]").bank("RolandTR808")
+$: sound("[- rim - - - rim - -]").bank("RolandTR808")
+$: sound("[bd bd bd bd]").bank("RolandTR808")
+// // Melody
+$: n("[[2 3 - 4][[- 4] 3][2 1 - -][[- 4] 3]]").scale("e:major").sound("gm_synth_strings_2").chorus(1).lpf(200)
+$: n("[[[- 0 - 0][- -][- 0 - 0][- -]][[- 0 - 0][- -][- 0 - 0][- -]]]/2").scale("e:major").sound("gm_electric_guitar_muted").hpf(1000)
+// // CHORDS
+$: n("[6 4 6 5]/8").scale("e:major").sound("gm_synth_strings_2").chorus(1).lpf(400)
+$: n("[0 2 4 7]/8").scale("e:major").sound("gm_synth_strings_2").chorus(1).lpf(400)
+$: n("[2 0 0 3]/8").scale("e:major").sound("gm_synth_strings_2").chorus(1).lpf(400)
+// // What I need to do after this is create a lead melody with the bass

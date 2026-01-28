@@ -255,6 +255,7 @@ alias gl='git log'
 alias gld='git dog'
 alias glg='git graph'
 alias gmt='git mergetool'
+alias grurl='git remote get-url origin'
 # ----------
 
 
