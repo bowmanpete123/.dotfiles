@@ -27,6 +27,41 @@
         "prefix": "comment",
         "body": "[//]: # (${1:Comment})"
     },
+    "table_row_1": {
+        "prefix": "table_row_1",
+        "body": [
+            "| |"
+        ],
+        "description": "A new table row with 1 column"
+    },
+    "table_row_2": {
+        "prefix": "table_row_2",
+        "body": [
+            "| | |"
+        ],
+        "description": "A new table row with 2 column"
+    },
+    "table_row_3": {
+        "prefix": "table_row_3",
+        "body": [
+            "| | | |"
+        ],
+        "description": "A new table row with 1 column"
+    },
+    "row4cols": {
+        "prefix": "row4cols",
+        "body": [
+            "| ${1:Cell} | ${2:Cell} | ${3:Cell} | ${4:Cell} |"
+        ],
+        "description": "A new table row with 4 column"
+    },
+    "table_row_5": {
+        "prefix": "table_row_5",
+        "body": [
+            "| | | | | |"
+        ],
+        "description": "A new table row with 5 column"
+    },
     "README_scaffold": {
         "prefix": "README_scaffold",
         "body": "---\nlast_edit: ${2:date}\nstatus: draft\n---\n\n# ${1:Title}\n\n## Purpose\n\n## Design\n\n### Components\n\n### Process\n\n## Setup\n\n## Known Issues\n\n[//]: # (References)\n"
@@ -133,5 +168,69 @@
             "Before providing the final answer, **think step-by-step** to ensure all constraints are met."
         ],
         "description": "A simple way of making sure that I structure ad hoc prompts to an LLM"
+    },
+    "doc_us_scaffold": {
+        "prefix": "doc_us_scaffold",
+        "body": [
+            "# ${1:User Story Title}",
+            "## Original User Story",
+            "## Analysis & Questions",
+            "## Plan",
+            "### Needed",
+            "### Contingent on [#Analysis] outcomes",
+            "## Current Data Storage",
+            "### Scenarios",
+            "#### Storage/Config - Data & Structures that needs to be there for the app to work (can only be edited by super/admin users)",
+            "##### Example Scenario",
+            "###### Brief",
+            "###### Data Structure",
+            "###### Questions",
+            "## Data Interactions",
+            "### Scenarios",
+            "#### Write -  Data that is created/stored by/about users and interactions with the app",
+            "#### Read - Data will needed by the application from the database",
+            "#### Update - Data in the database needs to be changed",
+            "#### Delete - Data in the database that needs to be erased"
+        ],
+        "description": "The scaffold for a user story document"
+    },
+    "doc_us_data_storage_scenario_scaffold": {
+        "prefix": "doc_us_data_scenario_scaffold",
+        "body": [
+            "##### ${1:Scenario Name}",
+            "###### Brief",
+            "${2:Scenario Brief}",
+            "###### Data Structure",
+            "| Column Name | Assumed Data Type | Description | Notes/Constraints | ",
+            "| --------------- | --------------- | --------------- | --------------- |",
+            "| Item1.1 | Item2.1 | Item3.1 | Item4.1 |",
+            "###### Questions"
+        ],
+        "description": "Scaffold for a data storage scenario in a User Story Document"
+    },
+    "doc_us_data_interaction_scenario_scaffold": {
+        "prefix": "doc_us_data_scenario_scaffold",
+        "body": [
+            "##### ${1:Scenario Name}",
+            "###### Brief",
+            "${2:Scenario Brief}",
+            "###### Data Structure",
+            "- DB -> BE:",
+            "    ```{sql}",
+            "    SELECT * from tags table",
+            "    ``` ",
+            "- BE -> FE:",
+            "    - Requests",
+            "        ```{}",
+            "        ```",
+            "    - Body",
+            "        ```{}",
+            "        ```",
+            "    - Headers",
+            "        ```{}",
+            "        ```",
+            "###### Questions"
+        ],
+        "description": "Scaffold for a data storage scenario in a User Story Document"
     }
 }

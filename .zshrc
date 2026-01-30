@@ -15,13 +15,13 @@
 if ! command -v starship &> /dev/null; then
     curl -sS https://starship.rs/install.sh | sh -s -- --yes --bin-dir ~/.local/bin >/dev/null 2>&1
     if [ $? -eq 0 ] && [ -f ~/.local/bin/starship ]; then
-         echo "Starship installed successfully"
-         export PATH=~/.local/bin:$PATH
-         echo "export PATH=~/.local/bin:\$PATH" >> ~/.zshrc
-   else
-     echo "Automatic installation of starship.rs failed. Install manually:"
-     echo "curl -sS https://starship.rs/install.sh | sh"
-   fi
+        echo "Starship installed successfully"
+        export PATH=~/.local/bin:$PATH
+        echo "export PATH=~/.local/bin:\$PATH" >> ~/.zshrc
+    else
+        echo "Automatic installation of starship.rs failed. Install manually:"
+        echo "curl -sS https://starship.rs/install.sh | sh"
+    fi
 fi
 # ----------
 
@@ -113,7 +113,7 @@ eval "$(ssh-agent -s)"
 
 
 # --------------------------------
-# -- Path Updater 
+# -- Path Updater
 # --------------------------------
 export PATH=$HOME/bin:/usr/local/bin:/opt/homebrew/bin:$PATH
 export PATH="$HOME/.local/share/custom_scripts:$PATH"
@@ -129,7 +129,7 @@ export LIBRARY_PATH="/opt/homebrew/lib:$LIBRARY_PATH"
 export LDFLAGS="-L/opt/homebrew/lib"
 export CFLAGS="${CFLAGS} -Wno-incompatible-function-pointer-types"
 export CXXFLAGS="${CXXFLAGS} -Wno-incompatible-function-pointer-types"
-export OBJC_DISABLE_INITIALIZE_FOR_SECTIONS=YES 
+export OBJC_DISABLE_INITIALIZE_FOR_SECTIONS=YES
 # ----------
 
 
@@ -139,7 +139,7 @@ export OBJC_DISABLE_INITIALIZE_FOR_SECTIONS=YES
 alias vim='nvim'
 export EDITOR=nvim
 # and am I using lua?
-[[ -f "/Users/$USER/.config/nvim/init.lua" ]] && export VIMINIT="luafile /Users/$USER/.config/nvim/init.lua" 
+[[ -f "/Users/$USER/.config/nvim/init.lua" ]] && export VIMINIT="luafile /Users/$USER/.config/nvim/init.lua"
 # ----------
 
 # --------------------------------
@@ -147,28 +147,29 @@ export EDITOR=nvim
 # --------------------------------
 
 # Alias definitions.
-if [ -f "/Users/$USER/.bash_aliases" ]; then
-    . "/Users/$USER/.bash_aliases"
+if [ -f "/Users/${USER}/.bash_aliases" ]; then
+
+    source "/Users/${USER}/.bash_aliases"
 fi
 
 # User Defined Functions Import
 # I've decided to copy the idea from bash_aliases in order to keep them seperate from here
-if [ -f "/Users/$USER/.shell_functions" ]; then
-	. "/Users/$USER/.shell_functions"
+if [ -f "/Users/${USER}/.shell_functions" ]; then
+    source "/Users/${USER}/.shell_functions"
 fi
 # These are wrapper functions for various commands I'll have
-if [ -f "/Users/$USER/.shell_wrappers" ]; then
-	. "/Users/$USER/.shell_wrappers"
+if [ -f "/Users/${USER}/.shell_wrappers" ]; then
+    source "/Users/${USER}/.shell_wrappers"
 fi
-# Load Client Sensitive Data 
-if [ -f "/Users/$USER/.secrets" ]; then
-	. "/Users/$USER/.secrets"
-    alias editsecrets='vim /Users/$USER/.secrets && source /Users/$USER/.secrets'
+# Load Client Sensitive Data
+if [ -f "/Users/${USER}/.secrets" ]; then
+    source "/Users/${USER}/.secrets"
+    alias editsecrets='vim /Users/${USER}/.secrets && source /Users/$USER/.secrets'
 fi
 
 # Define the on_exit functions
-if [ -f "/Users/$USER/.bash_exit" ]; then
-	trap "/Users/$USER/.bash_exit" EXIT
+if [ -f "/Users/${USER}/.bash_exit" ]; then
+    trap "/Users/${USER}/.bash_exit" EXIT
 fi
 
 # ---- End Of Bash Configuration Files ----
@@ -178,7 +179,7 @@ fi
 # --------------------------------
 
 # Load Config
-# ---------- 
+# ----------
 eval "$(starship init zsh)"
 # ----------
 
@@ -225,7 +226,7 @@ eval "$(mise activate zsh)"
 # ---- PROJECT VAR UPDATERS
 # --------------------------------
 
-# PYTHONPATH updater 
+# PYTHONPATH updater
 # ----------
 function projectpypath() {
     unset PYTHONPATH
@@ -237,11 +238,11 @@ function projectpypath() {
 # VPN status line for my prompt
 # ----------
 function vpnstatus() {
-  local vpn_name
-  vpn_name=$(scutil --nc list | grep 'Connected' | awk -F '"' '{print $2}')
-  if [[ -n "$vpn_name" ]]; then
-    echo "$vpn_name"
-  fi
+    local vpn_name
+    vpn_name=$(scutil --nc list | grep 'Connected' | awk -F '"' '{print $2}')
+    if [[ -n "$vpn_name" ]]; then
+        echo "$vpn_name"
+    fi
 }
 # ----------
 
@@ -261,16 +262,16 @@ export PKG_CONFIG_PATH="/opt/homebrew/bin/pkg-config:$(brew --prefix icu4c)/lib/
 # -- History
 # ----------
 fzf-history-widget() {
-  local selected=$(fc -l 1 | awk '{$1=""; print substr($0,2)}' | fzf --height=40% --reverse --border --ansi \
-      --color=fg:#f9f5d7,bg:#1d2021,hl:#d79921,fg:#fbf1c7,bg:#3c3836,hl:#fabd2f \
-      --pointer=" " \
-      --preview-window="up:1:wrap" \
-      --preview="echo {}")
+    local selected=$(fc -l 1 | awk '{$1=""; print substr($0,2)}' | fzf --height=40% --reverse --border --ansi \
+            --color=fg:#f9f5d7,bg:#1d2021,hl:#d79921,fg:#fbf1c7,bg:#3c3836,hl:#fabd2f \
+            --pointer=" " \
+            --preview-window="up:1:wrap" \
+        --preview="echo {}")
 
-  if [ -n "$selected" ]; then
-    BUFFER="$selected" 
-    zle accept-line
-  fi
+    if [ -n "$selected" ]; then
+        BUFFER="$selected"
+        zle accept-line
+    fi
 }
 zle -N fzf-history-widget
 bindkey '^R' fzf-history-widget

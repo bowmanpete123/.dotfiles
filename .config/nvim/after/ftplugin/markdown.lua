@@ -14,6 +14,11 @@ vim.opt_local.comments = {
   "b:+",
 }
 
+local lk = require("config.keymaps").lk
+local descMap = require("config.utils").desc_keymap
+
+descMap({ "n" }, lk.uniqueft, "p", ":w | !pandoc % -o %:r.pdf<CR>", "Convert MD to PDF")
+
 -- local injection_languagues = { "sql", "python", "lua", "bash" }
 --
 -- local constant_query = [[
@@ -22,7 +27,7 @@ vim.opt_local.comments = {
 -- ]]
 --
 -- local dynamic_query = [[
---   (fenced_code_block 
+--   (fenced_code_block
 --     (info_string (language) @_language) (code_fence_content) @injection.content (#set! injection.language "%s") (#match? @_language "%s"))
 -- ]]
 --
