@@ -1,0 +1,18 @@
+// Set the tempo to 120 BPM (4 beats per cycle)
+setcpm(120/4)
+
+$: stack(
+  // The Kick: Syncopated 'heartbeat' (on 1 and the 'and' of 2)
+  s("[bd [~ bd]]*2").bank("dr110").gain(3),
+  // The Rimshot: Signature 3+3+2 feel
+  s("[~ rim:1] ~ [~ rim:1] ~ ~ [~ rim:1] ~  ~").bank("tr626").rev().sustain(2).gain("2 2 2").delay("0.0 0.0 0.0"),
+  // The Shakers: Consistent 16th notes
+  s("hh*16").bank("dr110").gain("0.2 0.2 0.2 0.2"),
+  // The Snare: Hits on the off-beats
+)
+
+$: stack(
+    n("<c1*8 f1*8>").s("sine").lpf(300).shape(0.4).attack(0.15).sustain(0.18)
+    .gain(sine.range(0.5,2.5).fast(4))
+    .struct("1 1 1 1 1 1 1 1")
+)
