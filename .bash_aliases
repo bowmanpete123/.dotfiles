@@ -212,6 +212,7 @@ function git_remote_name() {
     command echo "$remote_name"
     return 0
 }
+
 function git_default_branch() {
     local remote_name
     remote_name=$(git_remote_name)
@@ -221,12 +222,19 @@ function git_default_branch() {
     git remote show "$remote_name" | command awk '/HEAD branch/ {print $NF}'
     return 0
 }
+
+function get_git_branch() {
+  git branch --show-current 2> /dev/null
+}
+
+
 # Aliases
 alias g='git'
 alias galias='cat ~/.bash_aliases | grep git'
 alias gs='git status --short'
 alias gd='git diff'
 alias gdf='git diff --name-only'
+alias gdo='git diff $(git_remote_name) $(get_git_branch)'
 alias gdom='git diff $(git_remote_name) $(git_default_branch)'
 alias gdfom='git diff $(git_remote_name) $(git_default_branch) --name-only'
 alias gr='git reset --hard'

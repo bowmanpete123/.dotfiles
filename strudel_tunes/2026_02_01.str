@@ -1,7 +1,14 @@
-stack(
-    sound("[- wind:4 wind:8 wind:4]*2"),
-    sound("<wind:1 wind:2>*2"),
-    sound(`[bd]*4, <[hh hh] [- hh*2] [- hh] [- hh*2]>*4`).bank("RolandTR808"),
-    note("<[c1*2] [[c1*0.5]*2 g0 c1 -]>").sound("gm_acoustic_bass")
-)
+$BassDrum: sound(`[bd]*4`).lpf(1000).gain(0.4)
+$SnareDrum: sound(`<[hh hh] [- hh*2] [- hh] [- hh*2]>*4`).bank("RolandTR808").gain(0.6)
+$Bass: note("<[c1*2] [[c1*0.5]*2 g0 c1 -]>").sound("gm_acoustic_bass").gain(0.6)
+$Winds: stack(sound("<wind:1 wind:2>*2"), sound("[- wind:4 wind:8 wind:4]*2")).gain(0.2)
+// Maybe a crash symbol and then lead into just the winds, and something else (?)
+// Then fade in something that follows the wind notes? - piano, guitar? 
+$Hummy: note("e4")
+.s("ocarina")
+.struct("~ ~ ~ t ~ ~ ~ t")
+.hpf(1000)
+.compressor(1, -20, 10, 0)
+.gain(slow(5, sine)
+.range(1, 0.2))
 

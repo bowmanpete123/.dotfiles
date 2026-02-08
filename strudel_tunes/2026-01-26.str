@@ -1,0 +1,17 @@
+// Strudel snippet for 2026-01-26
+
+setcps(0.8)
+
+stack(
+  // Drumkit
+  // s("bd(3,8) sd(1,8) hh(1,16)").bank('tr808'),
+
+  // Synth Bass
+  n("g2 c2 g2 c2").s("gm_synth_bass_1").note(),
+
+  // Sawwave Synth (G major and C major notes)
+  n("<g4 b4 d5 c4 e4 g4>").segment(4).s("gm_saw_wave").note(),
+
+  // Acoustic Guitar
+  chord("G C G C").s("gm_acoustic_guitar_steel").voicings().segment(4)
+).room(0.2).gain(0.8)
