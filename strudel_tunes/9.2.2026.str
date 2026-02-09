@@ -1,0 +1,18 @@
+setcps(200/60/4)
+
+$: stack(
+  s("bd(3,8)").gain(0.4),
+  n("c2").struct("x(3,8)").scale("C:Minor").transpose(0).s(chooseCycles(sine, saw, square)).gain(3).pan(1),
+n("[0 2 4]").s("gm_acoustic_guitar_steel").scale("C:Minor").transpose(24).adsr(
+chooseCycles(0, 0.1),
+chooseCycles(0.01, 0.02, 0.03, 0),
+chooseCycles(0.1, 0.15),
+chooseCycles(0.01, 0.02, 0.03, 0)
+).gain(2).hpf(500).lpf(2000).struct("x(3,8)")
+)
+$: stack(
+    s("[~ sd]").almostNever(x=>x.struct("[sd]*4"))
+)
+$: stack(s("[hh hh hh hh hh hh hh hh]/2")).room(0.005).delay(0)
+
+

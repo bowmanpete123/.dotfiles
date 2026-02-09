@@ -1,0 +1,60 @@
+setcps(0.82);
+
+_$: stack(
+  s("<[~ sd][~ sd]>*2").gain(0.2),
+  s("[bd ~]*2").gain(0.2),
+  s("hh*4").gain(1).lpf(5000).hpf(4000)
+).room(0.02).delay(0.1)
+
+_$: stack(
+  s("bd(3,8)").gain(0.4),
+)
+
+_$: n("[0 2 2 2]<[2 2 2 2][2 2 2 2][2 2 2 2][4 4 4 4]>").s("gm_acoustic_guitar_steel").scale("C:Minor").transpose(24).adsr(
+chooseCycles(0, 0.1),
+chooseCycles(0.01, 0.02, 0.03, 0),
+chooseCycles(0.1, 0.15),
+chooseCycles(0.01, 0.02, 0.03, 0)
+).gain(2).hpf(500).lpf(2000)
+
+_$: n("<[~ 2 ~ 2]><[~ 2 ~ 2][~ 2 ~ 2][~ 2 ~ 2][~ 4 ~ 4]>").s("gm_acoustic_guitar_steel").scale("C:Minor").transpose(24).adsr(
+chooseCycles(0),
+chooseCycles(0.01, 0.02, 0.03, 0),
+chooseCycles(0.01, 0.02, 0.03, 0),
+chooseCycles(0.01, 0.02, 0.03, 0)
+).gain(2).hpf(500).lpf(2000).pan(1)
+
+_$: n("<[0 ~ 2 ~]><[2 ~ 2 ~][2 ~ 2 ~][2 ~ 2 ~][4 ~ 4 ~]>").s("gm_acoustic_guitar_steel").scale("C:Minor").transpose(24).adsr(
+chooseCycles(0),
+chooseCycles(0.01, 0.02, 0.03, 0),
+chooseCycles(0.01, 0.02, 0.03, 0),
+chooseCycles(0.01, 0.02, 0.03, 0)
+).gain(2).hpf(500).lpf(2000).pan(0)
+
+_$: n("[0 2 2 2]<[2 2 2 2][2 2 2 2][2 2 2 2][4 4 4 4]>").s(chooseCycles(sine, saw, square)).scale("C:Minor").transpose(-24).gain(1).adsr(
+chooseCycles(0, 0.1),
+chooseCycles(0.01, 0.02, 0.03, 0),
+chooseCycles(0.1, 0.15),
+chooseCycles(0.01, 0.02, 0.03, 0)
+).lpf(50)
+
+_$: stack(
+    n("c2").struct("x(3,8)").scale("C:Minor").transpose(0).s(chooseCycles(sine, saw, square)).gain(3).pan(1),
+    n("eb2").struct("x(4,8) x(2,8)").scale("C:Minor").transpose(0).s(chooseCycles(sine, saw, square)).adsr(0, 0, 3, 0).gain(3).pan(-1),
+    n("g2").struct("x(4,8) x(2,8)").scale("C:Minor").transpose(0).s(chooseCycles(sine, saw, square)).adsr(0, 0, 3, 0).gain(3).pan(-1)
+).gain(4)
+
+
+
+_$: n("[0 2 2 2][4]").s("gm_acoustic_guitar_steel").scale("C:Minor").transpose(24).adsr(
+chooseCycles(0, 0.1),
+chooseCycles(0.01, 0.02, 0.03, 0),
+chooseCycles(0.1, 0.15),
+chooseCycles(0.01, 0.02, 0.03, 0)
+).gain(2).hpf(500).lpf(2000).struct("x(3,8)")
+
+
+_$: stack(
+  s("bd(3,8)").gain(0.4),
+  n("c2").struct("x(3,8)").scale("C:Minor").transpose(0).s(chooseCycles(sine, saw, square)).gain(3).pan(1),
+)
