@@ -1,0 +1,41 @@
+let bpm = 110
+setcps(bpm/60/4) 
+
+
+let key = "A:Major"
+
+_$: stack(
+   s("[bd ~]*2").lpf(250),
+   s("[bd bd]*2").lpf(50),
+).room(1).delay(0.8).gain(1.5)
+
+_$: stack(
+   s("[~ rim]").almostNever(x=>x.struct("[rim]*4")).lpf(3000),
+   // s("[hh ~ hh ~]*2").lpf(1000)
+).room(1).delay(0.8).gain(1.5)
+
+// Lone violin to start these shenanigans off
+
+// Then add some strings
+_$: stack(
+    n("[2 3 7 2 3 7 2 3]").s("gm_tremolo_strings").scale(key).transpose(24).delay(0.2),
+    n("[2 3 7 2 3 7 2 3]").s("gm_epiano2").scale(key).transpose(24).delay(0.1)
+    // n("[2 3 ~ 7 ~ 7 ~ 3]").s("gm_tremolo_strings").scale(key).transpose(24).delay(0.2),
+)
+// Chords in here
+_$: stack(
+    n("[2 3 ~ 7 ~ 7 ~ 3]").s("gm_tremolo_strings").scale(key).transpose(24).delay(0.2),
+)
+// Need to time these fuckers right
+_$: stack(
+    n("[[0*8][0*8][2*8][3*8]]/4").scale(key).s("gm_clavinet").transpose(-12).lpf(400),
+    n("[[0*8][0*8][2*8][3*8]]/4").scale(key).s("gm_music_box").transpose(-24).lpf(200)
+).gain(1)
+
+_$: stack(s("[hh hh hh hh]*2"),
+         s("bd ~ bd ~"),
+         s("~ sd ~ sd")
+).room(0.5).gain(1)
+
+
+
