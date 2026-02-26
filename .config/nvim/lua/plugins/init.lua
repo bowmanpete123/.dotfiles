@@ -265,6 +265,7 @@ return {
       require("todo-comments").setup({
         keywords = {
           LOOKUP = { icon = "󱛉", color = "lookup" },
+          DEPRECATE = { icon = "", color = "jiratask" },
           QUESTION = { icon = "󱛉", color = "lookup" },
           COMMENT = { icon = "󰅺", color = "comment" },
           TODO = { icon = "󰟃", color = "todo" },

@@ -53,6 +53,7 @@ alias editgit="vim ~/.gitconfig"
 alias editssh="vim ~/.ssh/config"
 alias editstarship="vim ~/.config/starship.toml"
 alias editmise="vim ~/.config/mise/config.toml"
+alias dadbod="nvim -c \"execute 'OpenDBInThisTab'\""
 
 # --------
 editkeys() {
@@ -227,17 +228,24 @@ function get_git_branch() {
   git branch --show-current 2> /dev/null
 }
 
+function gdom() {
+    git diff "origin/$(git_default_branch)...HEAD"
+}
 
+function gdofm() {
+    git diff "origin/$(git_default_branch)...HEAD" --name-only
+}
 # Aliases
 alias g='git'
 alias galias='cat ~/.bash_aliases | grep git'
 alias gs='git status --short'
 alias gd='git diff'
-alias gdf='git diff --name-only'
-alias gdo='git diff $(git_remote_name) $(get_git_branch)'
-alias gdof='git diff $(git_remote_name) $(get_git_branch) --name-only'
-alias gdom='git diff $(git_remote_name)'
-alias gdfom='git diff $(git_remote_name) --name-only'
+alias gdof='git diff @{u}...HEAD --name-only'
+alias gdo='git diff @{u}...HEAD'
+alias gdos='git diff @{u}...HEAD --stat'
+alias gdomf='git diff "origin/$(git_default_branch)...HEAD" --name-only'
+alias gdom='git diff "origin/$(git_default_branch)...HEAD"'
+alias gdoms='git diff "origin/$(git_default_branch)...HEAD" --stat'
 alias gr='git reset --hard'
 alias grh='git reset --hard head'
 alias grom='git reset --hard HEAD && git clean -fd'
