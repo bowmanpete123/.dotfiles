@@ -403,7 +403,6 @@ local default_formatter_config = {
       "fix",
       "--dialect",
       "bigquery",
-      "$FILENAME",
     },
   },
   docformatter = {

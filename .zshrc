@@ -73,7 +73,6 @@ zinit snippet OMZP::brew
 zinit snippet OMZP::command-not-found
 # ----------
 
-
 # Load Completions
 # ----------
 autoload -U compinit && compinit
@@ -85,12 +84,22 @@ compinit
 # End of Docker CLI completions
 # ----------
 
+# Zsh Edit CmdLine
+# ----------
+autoload -Uz edit-command-line
+zle -N edit-command-line
+# bindkey '^e' edit-command-line
+# ----------
+
+
+
 # Shell Inits
 # ----------
 # Zoxide
 eval "$(zoxide init zsh)"
 # Fzf
 eval "$(fzf --zsh)"
+# ----------
 
 # Ssh
 # ----------

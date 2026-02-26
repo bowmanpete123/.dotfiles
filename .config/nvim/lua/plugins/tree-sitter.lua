@@ -34,6 +34,7 @@ return {
         "lua",
         "markdown",
         "markdown_inline",
+        "mermaid",
         "python",
         "regex",
         "requirements",
