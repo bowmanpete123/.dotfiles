@@ -19,8 +19,8 @@ _$: stack(
 // Then add some strings
 _$: stack(
     n("[2 3 7 2 3 7 2 3]").s("gm_tremolo_strings").scale(key).transpose(24).delay(0.2),
-    n("[2 3 7 2 3 7 2 3]").s("gm_epiano2").scale(key).transpose(24).delay(0.1)
-    // n("[2 3 ~ 7 ~ 7 ~ 3]").s("gm_tremolo_strings").scale(key).transpose(24).delay(0.2),
+    n("[2 3 7 2 3 7 2 3]").s("gm_epiano2").scale(key).transpose(24).delay(0.1),
+    n("[2 3 ~ 7 ~ 7 ~ 3]").s("gm_tremolo_strings").scale(key).transpose(24).delay(0.2)
 )
 // Chords in here
 _$: stack(

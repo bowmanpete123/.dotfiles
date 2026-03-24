@@ -111,7 +111,6 @@ alias pip='python -m pip'
 alias spip='sudo python -m pip'
 alias dotsync='~/.dotfiles/dfsync.sh -m begin -r no'
 alias compose='docker compose'
-alias db='databricks'
 # --------
 
 # Screen Commands
