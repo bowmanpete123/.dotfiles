@@ -13,7 +13,7 @@
     alias lal='eza -lgxha'
     alias treea='eza -Tlhgxa'
     alias tree='eza -Tlhgx'
-} 
+}
 # If not use regular ls aliases
 [[ "$(cargo install --list | grep -c "eza")" -le 0 ]] && {
     alias ll='ls --color -AalF'
@@ -74,16 +74,16 @@ editkeys() {
 
 # Editor Stuff
 # --------
-if [[ ! $(echo uname | grep -c "Darwin") == 1 ]]; then 
-    [[ -f "$HOME/.config/nvim/init.lua" ]] && alias editvim="vim $HOME/.config/nvim/init.lua" || alias editvim="vim $HOME/.vim/.vimrc" 
+if [[ ! $(echo uname | grep -c "Darwin") == 1 ]]; then
+    [[ -f "$HOME/.config/nvim/init.lua" ]] && alias editvim="vim $HOME/.config/nvim/init.lua" || alias editvim="vim $HOME/.vim/.vimrc"
 else
     [[ -f "$HOME/.config/nvim/init.lua" ]] && alias editvim="vim $HOME/.config/nvim/init.lua" || alias editvim="vim $HOME/.vim/.vimrc"
 fi
 
 if [[ $(dnf list installed 2>/dev/null | grep -c "neovim") -ge 1 ]]; then
-    alias vim='nvim' && alias svim='sudo nvim' && alias oldvim='\vim' 
+    alias vim='nvim' && alias svim='sudo nvim' && alias oldvim='\vim'
 else
-    alias svim='sudo vim' 
+    alias svim='sudo vim'
 fi
 # --------
 
@@ -95,7 +95,7 @@ LANG_UPDATE_CMD="npm --location=global update && rustup update && cargo install-
 if [[ $(uname | grep -c "Linux") == 1 ]]; then
     [[ $(cat /proc/version | grep -c "UBUNTU") == 1 ]] && PACKAGE_UPDATE_CMD="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y "
     [[ $(cat /proc/version | grep -c "microsoft") == 1 ]] && PACKAGE_UPDATE_CMD="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y "
-    [[ $(cat /proc/version | grep -c "MANJARO") == 1 ]] && PACKAGE_UPDATE_CMD="sudo pacman -Syu --noconfirm && yay --noconfirm -Syu && sudo pamac update --no-confirm && sudo pamac clean --no-confirm && sudo pacman --noconfirm -R $(pacman -Qdtq) " && alias spacman="sudo pacman" 
+    [[ $(cat /proc/version | grep -c "MANJARO") == 1 ]] && PACKAGE_UPDATE_CMD="sudo pacman -Syu --noconfirm && yay --noconfirm -Syu && sudo pamac update --no-confirm && sudo pamac clean --no-confirm && sudo pacman --noconfirm -R $(pacman -Qdtq) " && alias spacman="sudo pacman"
     [[ $(cat /proc/version | grep -c "Red Hat") == 1 ]] && PACKAGE_UPDATE_CMD="sudo dnf update -y && sudo dnf upgrade -y && sudo dnf autoremove -y"
 elif [[ $(uname | grep -c "Darwin") == 1 ]]; then
     PACKAGE_UPDATE_CMD="brew update && brew upgrade && brew cleanup"
@@ -148,7 +148,7 @@ cargocheck ()
             alias "${2}"="${3}"
         fi
     else
-	    cargo install "${1}"
+        cargo install "${1}"
     fi
 }
 cargocheck bat cat
@@ -159,18 +159,26 @@ cargocheck tidy-viewer tv
 cargocheck bottom top btm
 cargocheck tealdeer man tldr
 cargocheck du-dust du dust
-cargocheck git-delta diff delta 
+cargocheck git-delta diff delta
 cargocheck ripgrep grep "rg --no-ignore"
 cargocheck cargo-update cargo-update "cargo install-update -a"
 
 # If zoxide is installed use that over cd
 [[ "$(cargo install --list | grep -c "zoxide")" -ge 1 ]] && {
     [[ $(uname | grep -c "Darwin") == 1 ]] && {
-        alias cd='z'
-        alias cdi='zi' 
-    } || {
+        cd() {
+            # __zoxide_z is the internal function zoxide uses to change directories
+            # "$@" ensures all arguments (like path names) are passed through
+            __zoxide_z "$@" && la
+        }
+        alias cdi='zi'
+        } || {
         eval "$(zoxide init bash --no-cmd)"
-        alias cd='__zoxide_z' 
+        cd() {
+            # __zoxide_z is the internal function zoxide uses to change directories
+            # "$@" ensures all arguments (like path names) are passed through
+            __zoxide_z "$@" && la
+        }
         alias cdi="__zoxide_zi"
     }
 }
@@ -183,14 +191,14 @@ alias jira_now="jira issues list --assignee \$(jira me) --status \"Progress\" --
 alias jira_subs="jira issues list --assignee \$(jira me) -t \"Sub-task\" --status \"~Done\" --status \"~Irrelevant\" --plain --no-headers"
 alias jira_next="jira issues list --assignee \$(jira me) --status \"~Done\" --status \"~Irrelevant\" --plain --no-headers"
 alias jira_me="jira issues list --assignee \$(jira me) --plain --no-headers"
-alias jira_epic="jira issues list --assignee \$(jira me) -t Epic --plain --no-headers" 
+alias jira_epic="jira issues list --assignee \$(jira me) -t Epic --plain --no-headers"
 alias jira_children="jira issues list -t \"Sub-task\" -P"
 alias jira_bug="jira issues create --assignee \$(jira me) -P \$(jira issues list --assignee \$(jira me) -t Epic --plain --no-headers --paginate 0:1 | awk '{print \$2}') -t Bug"
 alias jira_task="jira issues create --assignee \$(jira me) -P \$(jira issues list --assignee \$(jira me) -t Epic --plain --no-headers --paginate 0:1 | awk '{print \$2}') -t Task"
 alias jira_move="jira issues move"
 start_task()
 {
- jira issues move ${1} 'In Progress'
+    jira issues move ${1} 'In Progress'
 }
 alias jira_start="start_task"
 # ----------
@@ -225,7 +233,7 @@ function git_default_branch() {
 }
 
 function get_git_branch() {
-  git branch --show-current 2> /dev/null
+    git branch --show-current 2> /dev/null
 }
 
 function gdom() {
