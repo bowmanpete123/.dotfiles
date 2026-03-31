@@ -1,0 +1,48 @@
+let bpm = 180
+let key = "D:Major"
+setcps(bpm/60/4)
+
+// guitar_pick
+let guitar_pick_octave = 0
+let guitar_pick_sound = "gm_acoustic_guitar_nylon"
+let guitar_pick_rhythm_1 = "[[[d3]*4][[c#3]*4][[b2]*4][[c3]*4]]/16"
+let guitar_pick_rhythm_2 = "[[[- f#3 - f#3]*4][[- f#3 - f#3]*4][[- f#3 - f#3]*4][[[- g3][g3 g3]]*4]]/16"
+let guitar_pick_rhythm_3 = "[[[[~][g3]]*4][[[~][g3]]*4][[[~][g3]]*4][[[~][~]]*4]]/16"
+let guitar_pick_a = 0
+let guitar_pick_d = 0
+let guitar_pick_s = 0
+let guitar_pick_r = 0
+let guitar_pick_delay = 0
+let guitar_pick_room = 3
+let guitar_pick_gain = 0.1
+$: n(guitar_pick_rhythm_1).s(guitar_pick_sound).scale(key).transpose(0).adsr(guitar_pick_a, guitar_pick_d, guitar_pick_s, guitar_pick_r).delay(guitar_pick_delay).room(guitar_pick_room).gain(guitar_pick_gain)
+$: n(guitar_pick_rhythm_2).s(guitar_pick_sound).scale(key).transpose(0).adsr(guitar_pick_a, guitar_pick_d, guitar_pick_s, guitar_pick_r).delay(guitar_pick_delay).room(guitar_pick_room).gain(guitar_pick_gain)
+$: n(guitar_pick_rhythm_3).s(guitar_pick_sound).scale(key).transpose(0).adsr(guitar_pick_a, guitar_pick_d, guitar_pick_s, guitar_pick_r).delay(guitar_pick_delay).room(guitar_pick_room).gain(guitar_pick_gain)
+
+let vocal_sample = "gm_electric_guitar_clean" // Standard Strudel vocal set
+let vocal_rhythm =  "[ [a4@3 [g4 f#4]] [e4@3 - [d4 e4]] [f#4@2 - [d4 e4]] [[f#4 - ][f#4 e4 d4]] ]/4"
+let vocal_speed = 2 // Pitch shift (octave up)
+let vocal_chop = 0 // Number of chops per beat
+let vocal_gain_pattern = 0.1
+let vocal_legato = 1
+let vocal_distort = 0.5
+let vocal_phaser = 0.5
+let vocal_room = 0.3 // Reverb for space
+let vocal_cut = 0
+let vocal_atk = 0
+let vocal_rel = 0
+let vocal_lp = 0
+let vocal_hp = 0
+let vocal_pan = 0
+$: note(vocal_rhythm) 
+  .s(vocal_sample)
+  .speed(vocal_speed)
+  .cut(vocal_cut || 1)
+  .attack(vocal_atk || 0.01).release(vocal_rel || 0.1)
+  .lp(vocal_lp || 20000).hp(vocal_hp || 0)
+  .gain(vocal_gain_pattern)
+  .distort(vocal_distort)
+  .phaser(vocal_phaser)
+  .pan(vocal_pan || 0.5)
+  .room(vocal_room).sz(0.8)
+  .legato(vocal_legato)

@@ -1,0 +1,38 @@
+let bpm = 100
+setcps(bpm/60/4) 
+let key = "C:Major"
+
+// melody
+let melody_octave = 0
+let melody_sound = "piano"
+let melody_rhythm = "[[0 1][2 4][5 4][2 1][0 1 2][[4] 2][1 ~][0 1][2 4][5 4][0 1][2 1][0 1][2 1][0 1][0][~]]/2"
+let melody_a = 0
+let melody_d = 0
+let melody_s = 0
+let melody_r = 0
+let melody_delay = 0
+let melody_room = 0
+let melody_gain = 0.1
+$: n(melody_rhythm).s(melody_sound).scale(key).transpose(0).adsr(melody_a, melody_d, melody_s, melody_r).delay(melody_delay).room(melody_room).gain(melody_gain)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
