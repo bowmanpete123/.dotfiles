@@ -153,7 +153,6 @@ cargocheck ()
 }
 cargocheck bat cat
 cargocheck fd-find find fd
-cargocheck mise asdf
 cargocheck gping ping
 cargocheck tidy-viewer tv
 cargocheck bottom top btm
@@ -260,6 +259,8 @@ alias grom='git reset --hard HEAD && git clean -fd'
 alias gRom='git restore --source=$(git_remote_name)/$(git_default_branch)'
 alias gR='git restore'
 alias ga='git add'
+alias gau='git restore --staged'
+
 alias gf='git fetch'
 alias gP='git pull'
 alias gPom='git pull origin $(git_default_branch)'
@@ -276,6 +277,10 @@ alias gld='git dog'
 alias glg='git graph'
 alias gmt='git mergetool'
 alias grurl='git remote get-url origin'
+alias gw='git worktree'
+alias gwa='git worktree add'
+alias gwr='git worktree remove'
+alias gwl='git worktree list'
 # ----------
 
 

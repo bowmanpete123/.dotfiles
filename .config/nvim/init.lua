@@ -1,4 +1,3 @@
-
 -- ###################### --
 -- #  Main Nvim Config  # --
 -- ###################### --
@@ -236,6 +235,24 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
 })
 ----------
 
+-- Starts Treesitter
+----------
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function()
+    -- Enable treesitter highlighting and disable regex syntax
+    pcall(vim.treesitter.start)
+    -- Enable treesitter-based indentation
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+    local nmap = require("config.utils").norm_keyset
+    nmap("<leader>hc", "TSContextEnable", "Context Highlight On")
+    nmap("<leader>hs", "TSContextDisable", "Context Highlight Off")
+    nmap("<leader>ht", "TSContextToggle", "Context Highlight Toggle")
+    nmap("[c", 'lua require(treesitter-context").go_to_context(vim.v.count1)', "Context Highlight Toggle")
+  end,
+})
+----------
+
 --------------------------------
 -- Installer and Package Management
 --------------------------------
@@ -248,6 +265,40 @@ vim.lsp.set_log_level("debug")
 
 -- Packages for Install
 ----------
+-- Treesitter Syntaxes
+local treesitter_ei = {
+  "bash",
+  "css",
+  "comment",
+  "git_config",
+  "git_rebase",
+  "gitattributes",
+  "gitcommit",
+  "gitignore",
+  "go",
+  "graphql",
+  "html",
+  "htmldjango",
+  "http",
+  "javascript",
+  "jinja",
+  "jsonc",
+  "latex",
+  "lua",
+  "markdown",
+  "markdown_inline",
+  "mermaid",
+  "python",
+  "regex",
+  "requirements",
+  "rst",
+  "rust",
+  "terraform",
+  "toml",
+  "typescript",
+  "vim",
+  "yaml",
+}
 -- Core Language Servers
 local lsp_servers_ei = {
   ["bash-language-server"] = "bashls",
@@ -314,7 +365,12 @@ local default_ensure_installed =
   tC(formatters_ei, tC(linters_ei, tC(debuggers_ei, utils.get_table_keys(lsp_servers_ei))))
 ----------
 
--- Install Packages
+-- Install Tree Sitter Parsers
+----------
+utils.parser_setup(treesitter_ei)
+----------
+
+-- Install Packages via Mason
 ----------
 local ensure_installed = get_workspace_setting("ensure_installed", default_ensure_installed)
 vim.print(vim.inspect(ensure_installed))
