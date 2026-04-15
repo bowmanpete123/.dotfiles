@@ -237,8 +237,21 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
 
 -- Starts Treesitter
 ----------
+
 vim.api.nvim_create_autocmd("FileType", {
-  callback = function()
+  callback = function(args)
+    local excluded_filetypes = {
+      csv = true,
+      tsv = true,
+      csv_semicolon = true,
+      csv_whitespace = true,
+      csv_pipe = true,
+      rfc_csv = true,
+      rfc_semicolon = true,
+    }
+    if excluded_filetypes[args.match] then
+      return
+    end
     -- Enable treesitter highlighting and disable regex syntax
     pcall(vim.treesitter.start)
     -- Enable treesitter-based indentation
@@ -250,6 +263,23 @@ vim.api.nvim_create_autocmd("FileType", {
     nmap("<leader>ht", "TSContextToggle", "Context Highlight Toggle")
     nmap("[c", 'lua require(treesitter-context").go_to_context(vim.v.count1)', "Context Highlight Toggle")
   end,
+})
+----------
+
+-- Change Gemini's Fucked Diff Colours
+----------
+vim.api.nvim_create_autocmd({"WinEnter", "BufEnter", "OptionSet"}, {
+    pattern = "*",
+    callback = function()
+        -- vim.wo.diff checks if the current window is in diff mode
+        if vim.wo.diff then
+            -- We use 'nil' for fg to ensure we don't accidentally inherit weird text colors
+            vim.api.nvim_set_hl(0, 'DiffAdd', { bg = '#e1e4b5', fg = nil })
+            vim.api.nvim_set_hl(0, 'DiffDelete', { bg = '#f2c6c2', fg = nil })
+            vim.api.nvim_set_hl(0, 'DiffChange', { bg = '#d8e1d7', fg = nil })
+            vim.api.nvim_set_hl(0, 'DiffText', { bg = '#bdae93', fg = nil })
+        end
+    end,
 })
 ----------
 
@@ -282,7 +312,7 @@ local treesitter_ei = {
   "http",
   "javascript",
   "jinja",
-  "jsonc",
+  "json",
   "latex",
   "lua",
   "markdown",
