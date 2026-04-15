@@ -235,6 +235,54 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
 })
 ----------
 
+-- Starts Treesitter
+----------
+
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function(args)
+    local excluded_filetypes = {
+      csv = true,
+      tsv = true,
+      csv_semicolon = true,
+      csv_whitespace = true,
+      csv_pipe = true,
+      rfc_csv = true,
+      rfc_semicolon = true,
+    }
+    if excluded_filetypes[args.match] then
+      return
+    end
+    -- Enable treesitter highlighting and disable regex syntax
+    pcall(vim.treesitter.start)
+    -- Enable treesitter-based indentation
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+    local nmap = require("config.utils").norm_keyset
+    nmap("<leader>hc", "TSContextEnable", "Context Highlight On")
+    nmap("<leader>hs", "TSContextDisable", "Context Highlight Off")
+    nmap("<leader>ht", "TSContextToggle", "Context Highlight Toggle")
+    nmap("[c", 'lua require(treesitter-context").go_to_context(vim.v.count1)', "Context Highlight Toggle")
+  end,
+})
+----------
+
+-- Change Gemini's Fucked Diff Colours
+----------
+vim.api.nvim_create_autocmd({"WinEnter", "BufEnter", "OptionSet"}, {
+    pattern = "*",
+    callback = function()
+        -- vim.wo.diff checks if the current window is in diff mode
+        if vim.wo.diff then
+            -- We use 'nil' for fg to ensure we don't accidentally inherit weird text colors
+            vim.api.nvim_set_hl(0, 'DiffAdd', { bg = '#e1e4b5', fg = nil })
+            vim.api.nvim_set_hl(0, 'DiffDelete', { bg = '#f2c6c2', fg = nil })
+            vim.api.nvim_set_hl(0, 'DiffChange', { bg = '#d8e1d7', fg = nil })
+            vim.api.nvim_set_hl(0, 'DiffText', { bg = '#bdae93', fg = nil })
+        end
+    end,
+})
+----------
+
 --------------------------------
 -- Installer and Package Management
 --------------------------------
@@ -246,6 +294,40 @@ local lsp_config = require("config").lsp_config
 
 -- Packages for Install
 ----------
+-- Treesitter Syntaxes
+local treesitter_ei = {
+  "bash",
+  "css",
+  "comment",
+  "git_config",
+  "git_rebase",
+  "gitattributes",
+  "gitcommit",
+  "gitignore",
+  "go",
+  "graphql",
+  "html",
+  "htmldjango",
+  "http",
+  "javascript",
+  "jinja",
+  "json",
+  "latex",
+  "lua",
+  "markdown",
+  "markdown_inline",
+  "mermaid",
+  "python",
+  "regex",
+  "requirements",
+  "rst",
+  "rust",
+  "terraform",
+  "toml",
+  "typescript",
+  "vim",
+  "yaml",
+}
 -- Core Language Servers
 local lsp_servers_ei = {
   ["bash-language-server"] = "bashls",
@@ -311,7 +393,12 @@ local default_ensure_installed =
   tC(formatters_ei, tC(linters_ei, tC(debuggers_ei, utils.get_table_keys(lsp_servers_ei))))
 ----------
 
--- Install Packages
+-- Install Tree Sitter Parsers
+----------
+utils.parser_setup(treesitter_ei)
+----------
+
+-- Install Packages via Mason
 ----------
 local ensure_installed = get_workspace_setting("ensure_installed", default_ensure_installed)
 vim.print(vim.inspect(ensure_installed))

@@ -367,7 +367,7 @@ end
 M.ensure_install = function(type, packages)
   local sys_cmd = nil
   if type == "python" then
-    sys_cmd = { "pip", "install" }
+    sys_cmd = { "uv", "add" }
   end
   if sys_cmd ~= nil then
     print("Ensuring Package Installs")
@@ -574,7 +574,7 @@ M.is_code_injected = function(same_ft)
 end
 ----------
 
--- Dynamically Creates an Injection we can use in ft files
+-- Treesitter Stuff
 ----------
 -- For each language create a new query injection
 M.single_query_inject = function(lang, query)
@@ -598,6 +598,17 @@ M.create_treesitter_injection_query = function(constant_query, dynamic_query, in
     all_injections_query = ""
   end
   return all_injections_query .. constant_query
+end
+-- New Ensure Installed
+M.parser_setup = function(treesitter_ei)
+  local alreadyInstalled = require("nvim-treesitter.config").get_installed()
+  local parsersToInstall = vim
+    .iter(treesitter_ei)
+    :filter(function(parser)
+      return not vim.tbl_contains(alreadyInstalled, parser)
+    end)
+    :totable()
+  require("nvim-treesitter").install(parsersToInstall)
 end
 ----------
 
