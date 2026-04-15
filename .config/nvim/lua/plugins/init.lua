@@ -1,5 +1,13 @@
 return {
   {
+    "nvim-treesitter/nvim-treesitter",
+    branch = "main",
+    build = ":TSUpdate",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter-context",
+    },
+  },
+  {
     "vhyrro/luarocks.nvim",
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
