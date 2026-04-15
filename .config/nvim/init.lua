@@ -1,4 +1,3 @@
-
 -- ###################### --
 -- #  Main Nvim Config  # --
 -- ###################### --
@@ -243,7 +242,6 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
 -- Variables
 ----------
 local lsp_config = require("config").lsp_config
-vim.lsp.set_log_level("debug")
 ----------
 
 -- Packages for Install
@@ -261,9 +259,8 @@ local lsp_servers_ei = {
   ["pyright"] = "pyright",
   ["ruff"] = "ruff",
   ["ty"] = "ty",
-  ["rust-analyzer"] = "rust-analyzer",
+  ["rust-analyzer"] = "rust_analyzer",
   ["sqruff"] = "sqruff",
-  -- ["sqlls"] = "sqlls",
   ["taplo"] = "taplo",
   ["terraform-ls"] = "terraform-ls",
   ["texlab"] = "texlab",
@@ -420,6 +417,14 @@ local default_formatter_config = {
       "--fix",
       "$filename",
     },
+  },
+  djlint = {
+    command = utils.get_venv_command("djlint") or utils.get_mason_package("djlint"),
+    args = {
+      "--reformat",
+      "-",
+    },
+    cwd = require("conform.util").root_file({ "pyproject.toml", ".git", ".djlintrc" }),
   },
 }
 

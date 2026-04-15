@@ -40,6 +40,7 @@ return {
         "requirements",
         "rst",
         "rust",
+        "scheme",
         "terraform",
         "toml",
         "typescript",

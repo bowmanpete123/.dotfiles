@@ -111,6 +111,7 @@ alias pip='python -m pip'
 alias spip='sudo python -m pip'
 alias dotsync='~/.dotfiles/dfsync.sh -m begin -r no'
 alias compose='docker compose'
+alias mtmi='mise trust; mise install'
 # --------
 
 # Screen Commands
@@ -152,7 +153,6 @@ cargocheck ()
 }
 cargocheck bat cat
 cargocheck fd-find find fd
-cargocheck mise asdf
 cargocheck gping ping
 cargocheck tidy-viewer tv
 cargocheck bottom top btm
