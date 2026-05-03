@@ -30,6 +30,7 @@ return {
           pytest_discover_instances = true,
           args = { "-vv" },
         }),
+        require("rustaceanvim.neotest"),
       },
       status = {
         enabled = true,

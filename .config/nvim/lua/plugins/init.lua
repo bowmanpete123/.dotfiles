@@ -263,8 +263,13 @@ return {
   -- Rust Complexities
   {
     "mrcjkb/rustaceanvim",
-    version = "^5",
+    version = "^9",
     lazy = false,
+    init = function()
+      vim.g.rustaceanvim = {
+        test_executor = "nextest",
+      }
+    end,
   },
   -- Comment Flair
   {

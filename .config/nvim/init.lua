@@ -299,6 +299,7 @@ local treesitter_ei = {
   "bash",
   "css",
   "comment",
+  "dockerfile",
   "git_config",
   "git_rebase",
   "gitattributes",
@@ -339,7 +340,6 @@ local lsp_servers_ei = {
   ["json-lsp"] = "jsonls",
   ["lua-language-server"] = "lua_ls",
   ["marksman"] = "marksman",
-  ["pyright"] = "pyright",
   ["ruff"] = "ruff",
   ["ty"] = "ty",
   ["rust-analyzer"] = "rust_analyzer",
@@ -679,25 +679,6 @@ dap.configurations.lua = {
 dap.adapters.nlua = function(callback, config)
   callback({ type = "server", host = config.host or "127.0.0.1", port = config.port or 8086 })
 end
-----------
-
--- Rust
-----------
-dap.adapters.codelldb = {
-  type = "server",
-  port = "${port}",
-  executable = {
-    command = vim.fn.exepath("codelldb") ~= "" and vim.fn.exepath("codelldb")
-      or vim.fn.expand("~/.local/share/nvim/mason/bin/codelldb"),
-    args = { "--port", "${port}" },
-  },
-}
-
-vim.g.rustaceanvim = {
-  dap = {
-    adapter = dap.adapters.codelldb,
-  },
-}
 ----------
 
 -- Toggle Database
