@@ -421,7 +421,11 @@ lsp_config.diagnostics()
 ----------
 local lsp_servers = get_workspace_setting("ensure_installed", lsp_servers_ei)
 for _, v in pairs(lsp_servers) do
+  if pcall(require, "rustaceanvim") and v == "rust_analyzer" then
+    goto continue
+  end
   lsp_config.setup(v)
+  ::continue::
 end
 ----------
 
