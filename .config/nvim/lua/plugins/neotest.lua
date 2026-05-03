@@ -31,7 +31,45 @@ return {
           pytest_discover_instances = true,
           args = { "-vv" },
         }),
-        require("rustaceanvim.neotest"),
+        (function()
+          local adapter = require("rustaceanvim.neotest")
+          if type(adapter) == "function" then
+            adapter = adapter()
+          end
+          local original_results = adapter.results
+          adapter.results = function(spec, strategy_result)
+            local results = original_results(spec, strategy_result)
+            if strategy_result.code ~= 0 then
+              local output_content = require("neotest.lib").files.read(strategy_result.output)
+              local tree = spec.context.tree
+
+              -- 1. Parse Passing tests first
+              require("rustaceanvim.neotest.parser").populate_pass_positions(results, spec.context, output_content)
+
+              -- 2. Parse Ignored/Skipped tests
+              local lines = vim.split(output_content, "\n")
+              for _, line in ipairs(lines) do
+                local ignored_test = line:match("test%s(%S+)%s...%signored") or line:match("SKIP%s.*%s(%S+)$")
+                if ignored_test then
+                  local pos_id = require("rustaceanvim.neotest.trans").get_position_id(spec.context.file, ignored_test)
+                  results[pos_id] = { status = "skipped" }
+                end
+              end
+
+              -- 3. Everything else in a failing run that isn't Passed or Ignored MUST be a Failure
+              for _, node in tree:iter_nodes() do
+                if node:data().type == "test" then
+                  local id = node:data().id
+                  if not results[id] then
+                    results[id] = { status = "failed" }
+                  end
+                end
+              end
+            end
+            return results
+          end
+          return adapter
+        end)(),
       },
       status = {
         enabled = true,
